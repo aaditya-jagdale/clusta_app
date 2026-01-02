@@ -1,6 +1,5 @@
 import 'package:clusta/modules/chat/screens/chat_main_screen.dart';
 import 'package:clusta/modules/home/models/thread_model.dart';
-import 'package:clusta/modules/chat/screens/thread_chat_screen.dart';
 import 'package:clusta/modules/shared/services/date_service.dart';
 import 'package:clusta/modules/shared/widgets/colors.dart';
 import 'package:clusta/modules/shared/widgets/custom_progress_indicator.dart';
@@ -130,7 +129,9 @@ class _ThreadTileState extends ConsumerState<ThreadTile> {
                 await ref
                     .read(threadsProvider.notifier)
                     .deleteThread(thread.thread_id);
-                ref.read(threadsProvider.notifier).getThreads();
+                ref
+                    .read(threadsProvider.notifier)
+                    .getThreads(loadingState: false);
                 Navigator.pop(context);
               },
             ),
@@ -151,8 +152,11 @@ class _ThreadTileState extends ConsumerState<ThreadTile> {
     return GestureDetector(
       onTap: () {
         HapticFeedback.vibrate();
-        ref.read(threadsProvider.notifier).setActiveThread(widget.thread);
-        rightSlideTransition(context, const ChatMainScreen());
+
+        rightSlideTransition(
+          context,
+          ChatMainScreen(threadId: widget.thread.thread_id),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(6),

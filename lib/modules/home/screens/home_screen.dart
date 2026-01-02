@@ -62,8 +62,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   final newThread = await ref
                       .read(threadsProvider.notifier)
                       .createThread();
-                  ref.read(threadsProvider.notifier).setActiveThread(newThread);
-                  rightSlideTransition(context, ChatMainScreen());
+                  rightSlideTransition(
+                    context,
+                    ChatMainScreen(threadId: newThread.thread_id),
+                  );
                   setState(() => _isCreatingThread = false);
                 },
           child: Container(
@@ -96,9 +98,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       body: ref
           .watch(threadsProvider)
           .when(
-            data: (data) => data.threads.isEmpty
-                ? HomeEmptyState()
-                : HomeThreadList(threads: data.threads),
+            data: (data) =>
+                data.isEmpty ? HomeEmptyState() : HomeThreadList(threads: data),
             loading: () => const CustomProgressIndicator(),
             error: (error, stackTrace) => SomethingWentWrongScreen(
               onRetry: () {

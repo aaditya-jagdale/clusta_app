@@ -27,10 +27,17 @@ abstract final class ApiCalls {
       ApiConsts.threadSearch,
       data: {
         "status": "idle",
-        "limit": 10,
+        "limit": 100,
         "offset": 0,
         "sort_by": "updated_at",
         "sort_order": "desc",
+        "select": [
+          "thread_id",
+          "created_at",
+          "updated_at",
+          "metadata",
+          "status",
+        ],
       },
     );
     try {
@@ -80,13 +87,8 @@ abstract final class ApiCalls {
 
   static Future<ThreadModel?> getThreadById(String id) async {
     final response = await dio.get("${ApiConsts.threads}/$id");
-    // try {
     ThreadModel thread = ThreadModel.fromJson(response.data);
     return thread;
-    // } catch (e) {
-    //   print("Error parsing thread: $e");
-    //   return null;
-    // }
   }
 
   static Future<Response<ResponseBody>> sendMessageToThread(

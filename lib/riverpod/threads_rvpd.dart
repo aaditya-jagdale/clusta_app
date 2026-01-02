@@ -3,38 +3,20 @@ import 'package:clusta/modules/shared/api/api_calls.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThreadProviderModel {
-  final List<ThreadModel> threads;
-  final ThreadModel activeThread;
-  ThreadProviderModel({required this.threads, required this.activeThread});
-
-  ThreadProviderModel copyWith({
-    List<ThreadModel>? threads,
-    ThreadModel? activeThread,
-  }) {
-    return ThreadProviderModel(
-      threads: threads ?? this.threads,
-      activeThread: activeThread ?? this.activeThread,
-    );
-  }
-}
-
 final threadsProvider =
-    AsyncNotifierProvider<ThreadsProvider, ThreadProviderModel>(
+    AsyncNotifierProvider<ThreadsProvider, List<ThreadModel>>(
       () => ThreadsProvider(),
     );
 
-class ThreadsProvider extends AsyncNotifier<ThreadProviderModel> {
+class ThreadsProvider extends AsyncNotifier<List<ThreadModel>> {
   @override
-  ThreadProviderModel build() {
-    return ThreadProviderModel(threads: [], activeThread: ThreadModel());
+  List<ThreadModel> build() {
+    return [];
   }
 
   Future<ThreadModel> createThread() async {
     final newThread = await ApiCalls.createThread();
-    state = AsyncValue.data(
-      state.value!.copyWith(threads: [newThread, ...state.value!.threads]),
-    );
+    state = AsyncValue.data([newThread, ...state.value!]);
     return newThread;
   }
 
@@ -43,9 +25,7 @@ class ThreadsProvider extends AsyncNotifier<ThreadProviderModel> {
     try {
       final threads = await ApiCalls.getAllThreads();
 
-      state = AsyncValue.data(
-        state.value!.copyWith(threads: threads, activeThread: threads.first),
-      );
+      state = AsyncValue.data(threads);
     } on DioException catch (e, s) {
       state = AsyncValue.error(e.response?.data, s);
     }
@@ -66,37 +46,40 @@ class ThreadsProvider extends AsyncNotifier<ThreadProviderModel> {
   Future<void> deleteThread(String threadId) async {
     await ApiCalls.deleteThread(threadId);
     state = AsyncValue.data(
-      state.value!.copyWith(
-        threads: state.value!.threads
-            .where((thread) => thread.thread_id != threadId)
-            .toList(),
-      ),
+      state.value!.where((thread) => thread.thread_id != threadId).toList(),
     );
+  }
+
+  void setThreadModelById(ThreadModel threadModel) {
+    final threadIndex = state.value!.indexWhere(
+      (thread) => thread.thread_id == threadModel.thread_id,
+    );
+
+    if (threadIndex == -1) return;
+    state.value![threadIndex] = threadModel;
+    state = AsyncValue.data(state.value!);
+  }
+}
+
+final activeThreadProvider =
+    AsyncNotifierProvider<ActiveThreadProvider, ThreadModel?>(
+      () => ActiveThreadProvider(),
+    );
+
+class ActiveThreadProvider extends AsyncNotifier<ThreadModel?> {
+  @override
+  ThreadModel? build() {
+    return null;
   }
 
   Future<void> getThreadById(String threadId) async {
     state = AsyncValue.loading();
     try {
       final thread = await ApiCalls.getThreadById(threadId);
-      state = AsyncValue.data(state.value!.copyWith(activeThread: thread));
+      if (thread == null) return;
+      state = AsyncValue.data(thread);
     } on DioException catch (e, s) {
       state = AsyncValue.error(e.response?.data, s);
     }
-  }
-
-  void setActiveThread(ThreadModel thread) {
-    state = AsyncValue.data(state.value!.copyWith(activeThread: thread));
-  }
-
-  void setThreadModelById(ThreadModel threadModel) {
-    final threadIndex = state.value!.threads.indexWhere(
-      (thread) => thread.thread_id == threadModel.thread_id,
-    );
-
-    if (threadIndex == -1) return;
-    state.value!.threads[threadIndex] = threadModel;
-    state = AsyncValue.data(
-      state.value!.copyWith(threads: state.value!.threads),
-    );
   }
 }
