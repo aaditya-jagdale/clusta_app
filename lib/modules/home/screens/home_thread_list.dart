@@ -1,16 +1,18 @@
-import 'package:clusta/modules/home/models/threads_model.dart';
+import 'package:clusta/modules/home/models/thread_model.dart';
 import 'package:clusta/modules/home/widgets/thread_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeThreadList extends StatefulWidget {
+class HomeThreadList extends ConsumerStatefulWidget {
   final List<ThreadModel> threads;
   const HomeThreadList({super.key, required this.threads});
 
   @override
-  State<HomeThreadList> createState() => _HomeThreadListState();
+  ConsumerState<HomeThreadList> createState() => _HomeThreadListState();
 }
 
-class _HomeThreadListState extends State<HomeThreadList> {
+class _HomeThreadListState extends ConsumerState<HomeThreadList> {
+
   @override
   Widget build(BuildContext context) {
     return Column(

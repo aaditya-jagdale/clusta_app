@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'thread_chat_model.freezed.dart';
-part 'thread_chat_model.g.dart';
+part 'thread_model.freezed.dart';
+part 'thread_model.g.dart';
 
 @freezed
-class ThreadChatResponse with _$ThreadChatResponse {
-  const factory ThreadChatResponse({
+class ThreadModel with _$ThreadModel {
+  const factory ThreadModel({
     @Default('') String thread_id,
     @Default('') String created_at,
     @Default('') String updated_at,
@@ -13,22 +13,21 @@ class ThreadChatResponse with _$ThreadChatResponse {
     @Default('') String status,
     @Default(ThreadConfig()) ThreadConfig config,
     @Default(ThreadValues()) ThreadValues values,
-    @Default({}) Map<String, dynamic> interrupts,
     String? error,
-  }) = _ThreadChatResponse;
+  }) = _ThreadModel;
 
-  factory ThreadChatResponse.fromJson(Map<String, dynamic> json) =>
-      _$ThreadChatResponseFromJson(json);
+  factory ThreadModel.fromJson(Map<String, dynamic> json) =>
+      _$ThreadModelFromJson(json);
 }
 
 @freezed
 class ThreadMetadata with _$ThreadMetadata {
   const factory ThreadMetadata({
-    @Default('') String title,
+    @Default('Untitled') String title,
     @Default(0) int sources,
     @Default('') String graph_id,
     @Default('') String assistant_id,
-    @Default([]) List<SourceDetail> source_details,
+    @Default(SourceDetail()) SourceDetail source_details,
   }) = _ThreadMetadata;
 
   factory ThreadMetadata.fromJson(Map<String, dynamic> json) =>
@@ -105,4 +104,20 @@ class TokenDetails with _$TokenDetails {
 
   factory TokenDetails.fromJson(Map<String, dynamic> json) =>
       _$TokenDetailsFromJson(json);
+}
+
+extension ThreadMessageX on ThreadMessage {
+  String get plainTextContent {
+    if (content is String) {
+      return content as String;
+    }
+    if (content is List && (content as List).isNotEmpty) {
+      final first = (content as List).first;
+      if (first is Map && first.containsKey('text')) {
+        return first['text'] ?? "";
+      }
+      return content.toString();
+    }
+    return content?.toString() ?? "";
+  }
 }

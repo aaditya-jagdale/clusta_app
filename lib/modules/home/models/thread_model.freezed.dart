@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'thread_chat_model.dart';
+part of 'thread_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-ThreadChatResponse _$ThreadChatResponseFromJson(Map<String, dynamic> json) {
-  return _ThreadChatResponse.fromJson(json);
+ThreadModel _$ThreadModelFromJson(Map<String, dynamic> json) {
+  return _ThreadModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ThreadChatResponse {
+mixin _$ThreadModel {
   String get thread_id => throw _privateConstructorUsedError;
   String get created_at => throw _privateConstructorUsedError;
   String get updated_at => throw _privateConstructorUsedError;
@@ -28,25 +28,24 @@ mixin _$ThreadChatResponse {
   String get status => throw _privateConstructorUsedError;
   ThreadConfig get config => throw _privateConstructorUsedError;
   ThreadValues get values => throw _privateConstructorUsedError;
-  Map<String, dynamic> get interrupts => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
-  /// Serializes this ThreadChatResponse to a JSON map.
+  /// Serializes this ThreadModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ThreadChatResponseCopyWith<ThreadChatResponse> get copyWith =>
+  $ThreadModelCopyWith<ThreadModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ThreadChatResponseCopyWith<$Res> {
-  factory $ThreadChatResponseCopyWith(
-    ThreadChatResponse value,
-    $Res Function(ThreadChatResponse) then,
-  ) = _$ThreadChatResponseCopyWithImpl<$Res, ThreadChatResponse>;
+abstract class $ThreadModelCopyWith<$Res> {
+  factory $ThreadModelCopyWith(
+    ThreadModel value,
+    $Res Function(ThreadModel) then,
+  ) = _$ThreadModelCopyWithImpl<$Res, ThreadModel>;
   @useResult
   $Res call({
     String thread_id,
@@ -56,7 +55,6 @@ abstract class $ThreadChatResponseCopyWith<$Res> {
     String status,
     ThreadConfig config,
     ThreadValues values,
-    Map<String, dynamic> interrupts,
     String? error,
   });
 
@@ -66,16 +64,16 @@ abstract class $ThreadChatResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ThreadChatResponseCopyWithImpl<$Res, $Val extends ThreadChatResponse>
-    implements $ThreadChatResponseCopyWith<$Res> {
-  _$ThreadChatResponseCopyWithImpl(this._value, this._then);
+class _$ThreadModelCopyWithImpl<$Res, $Val extends ThreadModel>
+    implements $ThreadModelCopyWith<$Res> {
+  _$ThreadModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -87,7 +85,6 @@ class _$ThreadChatResponseCopyWithImpl<$Res, $Val extends ThreadChatResponse>
     Object? status = null,
     Object? config = null,
     Object? values = null,
-    Object? interrupts = null,
     Object? error = freezed,
   }) {
     return _then(
@@ -120,10 +117,6 @@ class _$ThreadChatResponseCopyWithImpl<$Res, $Val extends ThreadChatResponse>
                 ? _value.values
                 : values // ignore: cast_nullable_to_non_nullable
                       as ThreadValues,
-            interrupts: null == interrupts
-                ? _value.interrupts
-                : interrupts // ignore: cast_nullable_to_non_nullable
-                      as Map<String, dynamic>,
             error: freezed == error
                 ? _value.error
                 : error // ignore: cast_nullable_to_non_nullable
@@ -133,7 +126,7 @@ class _$ThreadChatResponseCopyWithImpl<$Res, $Val extends ThreadChatResponse>
     );
   }
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -143,7 +136,7 @@ class _$ThreadChatResponseCopyWithImpl<$Res, $Val extends ThreadChatResponse>
     });
   }
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -153,7 +146,7 @@ class _$ThreadChatResponseCopyWithImpl<$Res, $Val extends ThreadChatResponse>
     });
   }
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -165,12 +158,12 @@ class _$ThreadChatResponseCopyWithImpl<$Res, $Val extends ThreadChatResponse>
 }
 
 /// @nodoc
-abstract class _$$ThreadChatResponseImplCopyWith<$Res>
-    implements $ThreadChatResponseCopyWith<$Res> {
-  factory _$$ThreadChatResponseImplCopyWith(
-    _$ThreadChatResponseImpl value,
-    $Res Function(_$ThreadChatResponseImpl) then,
-  ) = __$$ThreadChatResponseImplCopyWithImpl<$Res>;
+abstract class _$$ThreadModelImplCopyWith<$Res>
+    implements $ThreadModelCopyWith<$Res> {
+  factory _$$ThreadModelImplCopyWith(
+    _$ThreadModelImpl value,
+    $Res Function(_$ThreadModelImpl) then,
+  ) = __$$ThreadModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -181,7 +174,6 @@ abstract class _$$ThreadChatResponseImplCopyWith<$Res>
     String status,
     ThreadConfig config,
     ThreadValues values,
-    Map<String, dynamic> interrupts,
     String? error,
   });
 
@@ -194,15 +186,15 @@ abstract class _$$ThreadChatResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ThreadChatResponseImplCopyWithImpl<$Res>
-    extends _$ThreadChatResponseCopyWithImpl<$Res, _$ThreadChatResponseImpl>
-    implements _$$ThreadChatResponseImplCopyWith<$Res> {
-  __$$ThreadChatResponseImplCopyWithImpl(
-    _$ThreadChatResponseImpl _value,
-    $Res Function(_$ThreadChatResponseImpl) _then,
+class __$$ThreadModelImplCopyWithImpl<$Res>
+    extends _$ThreadModelCopyWithImpl<$Res, _$ThreadModelImpl>
+    implements _$$ThreadModelImplCopyWith<$Res> {
+  __$$ThreadModelImplCopyWithImpl(
+    _$ThreadModelImpl _value,
+    $Res Function(_$ThreadModelImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -214,11 +206,10 @@ class __$$ThreadChatResponseImplCopyWithImpl<$Res>
     Object? status = null,
     Object? config = null,
     Object? values = null,
-    Object? interrupts = null,
     Object? error = freezed,
   }) {
     return _then(
-      _$ThreadChatResponseImpl(
+      _$ThreadModelImpl(
         thread_id: null == thread_id
             ? _value.thread_id
             : thread_id // ignore: cast_nullable_to_non_nullable
@@ -247,10 +238,6 @@ class __$$ThreadChatResponseImplCopyWithImpl<$Res>
             ? _value.values
             : values // ignore: cast_nullable_to_non_nullable
                   as ThreadValues,
-        interrupts: null == interrupts
-            ? _value._interrupts
-            : interrupts // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>,
         error: freezed == error
             ? _value.error
             : error // ignore: cast_nullable_to_non_nullable
@@ -262,8 +249,8 @@ class __$$ThreadChatResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ThreadChatResponseImpl implements _ThreadChatResponse {
-  const _$ThreadChatResponseImpl({
+class _$ThreadModelImpl implements _ThreadModel {
+  const _$ThreadModelImpl({
     this.thread_id = '',
     this.created_at = '',
     this.updated_at = '',
@@ -271,12 +258,11 @@ class _$ThreadChatResponseImpl implements _ThreadChatResponse {
     this.status = '',
     this.config = const ThreadConfig(),
     this.values = const ThreadValues(),
-    final Map<String, dynamic> interrupts = const {},
     this.error,
-  }) : _interrupts = interrupts;
+  });
 
-  factory _$ThreadChatResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ThreadChatResponseImplFromJson(json);
+  factory _$ThreadModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ThreadModelImplFromJson(json);
 
   @override
   @JsonKey()
@@ -299,28 +285,19 @@ class _$ThreadChatResponseImpl implements _ThreadChatResponse {
   @override
   @JsonKey()
   final ThreadValues values;
-  final Map<String, dynamic> _interrupts;
-  @override
-  @JsonKey()
-  Map<String, dynamic> get interrupts {
-    if (_interrupts is EqualUnmodifiableMapView) return _interrupts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_interrupts);
-  }
-
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'ThreadChatResponse(thread_id: $thread_id, created_at: $created_at, updated_at: $updated_at, metadata: $metadata, status: $status, config: $config, values: $values, interrupts: $interrupts, error: $error)';
+    return 'ThreadModel(thread_id: $thread_id, created_at: $created_at, updated_at: $updated_at, metadata: $metadata, status: $status, config: $config, values: $values, error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ThreadChatResponseImpl &&
+            other is _$ThreadModelImpl &&
             (identical(other.thread_id, thread_id) ||
                 other.thread_id == thread_id) &&
             (identical(other.created_at, created_at) ||
@@ -332,10 +309,6 @@ class _$ThreadChatResponseImpl implements _ThreadChatResponse {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.config, config) || other.config == config) &&
             (identical(other.values, values) || other.values == values) &&
-            const DeepCollectionEquality().equals(
-              other._interrupts,
-              _interrupts,
-            ) &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -350,29 +323,25 @@ class _$ThreadChatResponseImpl implements _ThreadChatResponse {
     status,
     config,
     values,
-    const DeepCollectionEquality().hash(_interrupts),
     error,
   );
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ThreadChatResponseImplCopyWith<_$ThreadChatResponseImpl> get copyWith =>
-      __$$ThreadChatResponseImplCopyWithImpl<_$ThreadChatResponseImpl>(
-        this,
-        _$identity,
-      );
+  _$$ThreadModelImplCopyWith<_$ThreadModelImpl> get copyWith =>
+      __$$ThreadModelImplCopyWithImpl<_$ThreadModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ThreadChatResponseImplToJson(this);
+    return _$$ThreadModelImplToJson(this);
   }
 }
 
-abstract class _ThreadChatResponse implements ThreadChatResponse {
-  const factory _ThreadChatResponse({
+abstract class _ThreadModel implements ThreadModel {
+  const factory _ThreadModel({
     final String thread_id,
     final String created_at,
     final String updated_at,
@@ -380,12 +349,11 @@ abstract class _ThreadChatResponse implements ThreadChatResponse {
     final String status,
     final ThreadConfig config,
     final ThreadValues values,
-    final Map<String, dynamic> interrupts,
     final String? error,
-  }) = _$ThreadChatResponseImpl;
+  }) = _$ThreadModelImpl;
 
-  factory _ThreadChatResponse.fromJson(Map<String, dynamic> json) =
-      _$ThreadChatResponseImpl.fromJson;
+  factory _ThreadModel.fromJson(Map<String, dynamic> json) =
+      _$ThreadModelImpl.fromJson;
 
   @override
   String get thread_id;
@@ -402,15 +370,13 @@ abstract class _ThreadChatResponse implements ThreadChatResponse {
   @override
   ThreadValues get values;
   @override
-  Map<String, dynamic> get interrupts;
-  @override
   String? get error;
 
-  /// Create a copy of ThreadChatResponse
+  /// Create a copy of ThreadModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ThreadChatResponseImplCopyWith<_$ThreadChatResponseImpl> get copyWith =>
+  _$$ThreadModelImplCopyWith<_$ThreadModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -424,7 +390,7 @@ mixin _$ThreadMetadata {
   int get sources => throw _privateConstructorUsedError;
   String get graph_id => throw _privateConstructorUsedError;
   String get assistant_id => throw _privateConstructorUsedError;
-  List<SourceDetail> get source_details => throw _privateConstructorUsedError;
+  SourceDetail get source_details => throw _privateConstructorUsedError;
 
   /// Serializes this ThreadMetadata to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -448,8 +414,10 @@ abstract class $ThreadMetadataCopyWith<$Res> {
     int sources,
     String graph_id,
     String assistant_id,
-    List<SourceDetail> source_details,
+    SourceDetail source_details,
   });
+
+  $SourceDetailCopyWith<$Res> get source_details;
 }
 
 /// @nodoc
@@ -494,10 +462,20 @@ class _$ThreadMetadataCopyWithImpl<$Res, $Val extends ThreadMetadata>
             source_details: null == source_details
                 ? _value.source_details
                 : source_details // ignore: cast_nullable_to_non_nullable
-                      as List<SourceDetail>,
+                      as SourceDetail,
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of ThreadMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SourceDetailCopyWith<$Res> get source_details {
+    return $SourceDetailCopyWith<$Res>(_value.source_details, (value) {
+      return _then(_value.copyWith(source_details: value) as $Val);
+    });
   }
 }
 
@@ -515,8 +493,11 @@ abstract class _$$ThreadMetadataImplCopyWith<$Res>
     int sources,
     String graph_id,
     String assistant_id,
-    List<SourceDetail> source_details,
+    SourceDetail source_details,
   });
+
+  @override
+  $SourceDetailCopyWith<$Res> get source_details;
 }
 
 /// @nodoc
@@ -558,9 +539,9 @@ class __$$ThreadMetadataImplCopyWithImpl<$Res>
             : assistant_id // ignore: cast_nullable_to_non_nullable
                   as String,
         source_details: null == source_details
-            ? _value._source_details
+            ? _value.source_details
             : source_details // ignore: cast_nullable_to_non_nullable
-                  as List<SourceDetail>,
+                  as SourceDetail,
       ),
     );
   }
@@ -570,12 +551,12 @@ class __$$ThreadMetadataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ThreadMetadataImpl implements _ThreadMetadata {
   const _$ThreadMetadataImpl({
-    this.title = '',
+    this.title = 'Untitled',
     this.sources = 0,
     this.graph_id = '',
     this.assistant_id = '',
-    final List<SourceDetail> source_details = const [],
-  }) : _source_details = source_details;
+    this.source_details = const SourceDetail(),
+  });
 
   factory _$ThreadMetadataImpl.fromJson(Map<String, dynamic> json) =>
       _$$ThreadMetadataImplFromJson(json);
@@ -592,14 +573,9 @@ class _$ThreadMetadataImpl implements _ThreadMetadata {
   @override
   @JsonKey()
   final String assistant_id;
-  final List<SourceDetail> _source_details;
   @override
   @JsonKey()
-  List<SourceDetail> get source_details {
-    if (_source_details is EqualUnmodifiableListView) return _source_details;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_source_details);
-  }
+  final SourceDetail source_details;
 
   @override
   String toString() {
@@ -617,10 +593,8 @@ class _$ThreadMetadataImpl implements _ThreadMetadata {
                 other.graph_id == graph_id) &&
             (identical(other.assistant_id, assistant_id) ||
                 other.assistant_id == assistant_id) &&
-            const DeepCollectionEquality().equals(
-              other._source_details,
-              _source_details,
-            ));
+            (identical(other.source_details, source_details) ||
+                other.source_details == source_details));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -631,7 +605,7 @@ class _$ThreadMetadataImpl implements _ThreadMetadata {
     sources,
     graph_id,
     assistant_id,
-    const DeepCollectionEquality().hash(_source_details),
+    source_details,
   );
 
   /// Create a copy of ThreadMetadata
@@ -657,7 +631,7 @@ abstract class _ThreadMetadata implements ThreadMetadata {
     final int sources,
     final String graph_id,
     final String assistant_id,
-    final List<SourceDetail> source_details,
+    final SourceDetail source_details,
   }) = _$ThreadMetadataImpl;
 
   factory _ThreadMetadata.fromJson(Map<String, dynamic> json) =
@@ -672,7 +646,7 @@ abstract class _ThreadMetadata implements ThreadMetadata {
   @override
   String get assistant_id;
   @override
-  List<SourceDetail> get source_details;
+  SourceDetail get source_details;
 
   /// Create a copy of ThreadMetadata
   /// with the given fields replaced by the non-null parameter values.

@@ -30,6 +30,10 @@ class MyApp extends StatelessWidget {
             seedColor: AppColors.primary,
             brightness: Brightness.dark,
           ),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: AppColors.primary,
+            
+          ),
           appBarTheme: AppBarTheme(backgroundColor: AppColors.tertiary),
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: AppColors.tertiary,

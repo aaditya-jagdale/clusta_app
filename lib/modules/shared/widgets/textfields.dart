@@ -15,6 +15,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
   final Function()? onTap;
+  final bool autofocus;
   final Function(String)? onChanged;
 
   const CustomTextField({
@@ -31,6 +32,7 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.onSaved,
     this.onTap,
+    this.autofocus = false,
     this.onChanged,
   });
 
@@ -70,15 +72,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.black,
               borderRadius: BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: AppColors.black),
+              border: Border.all(color: AppColors.primary),
               boxShadow: focusNode.hasFocus
                   ? [CustomShadows.customShadowPressed]
                   : [CustomShadows.customShadow],
             ),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextFormField(
+              autofocus: widget.autofocus,
               focusNode: focusNode,
               onTap: widget.onTap,
               onChanged: widget.onChanged,
@@ -91,11 +94,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
               onSaved: widget.onSaved,
               minLines: 1,
               maxLines: widget.maxLines ?? 1,
+              style: TextStyle(fontSize: 16, color: Colors.white),
+              cursorColor: AppColors.primary,
               decoration: InputDecoration(
                 prefix: widget.prefix != null ? Text(widget.prefix!) : null,
                 prefixStyle: TextStyle(
                   fontSize: 16,
-                  color: AppColors.black,
+                  color: AppColors.white,
                   fontWeight: FontWeight.normal,
                 ),
                 counterText: '',

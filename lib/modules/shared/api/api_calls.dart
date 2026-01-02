@@ -1,5 +1,4 @@
-import 'package:clusta/modules/home/models/thread_chat_model.dart';
-import 'package:clusta/modules/home/models/threads_model.dart';
+import 'package:clusta/modules/home/models/thread_model.dart';
 import 'package:clusta/modules/shared/api/api_consts.dart';
 import 'package:dio/dio.dart';
 import 'package:clusta/modules/shared/api/interceptors/auth_interceptor.dart';
@@ -24,24 +23,6 @@ abstract final class ApiCalls {
         ]);
 
   static Future<List<ThreadModel>> getAllThreads() async {
-    //     curl http://localhost:8123/threads/search \
-    //   --request POST \
-    //   --header 'Content-Type: application/json' \
-    //   --data '{
-    //   "values": {},
-    //   "status": "idle",
-    //   "limit": 10,
-    //   "offset": 0,
-    //   "sort_by": "updated_at",
-    //   "sort_order": "desc",
-    //   "select": [
-    //     "thread_id",
-    //     "created_at",
-    //     "updated_at",
-    //     "metadata",
-    //     "status"
-    //   ]
-    // }'
     final response = await dio.post(
       ApiConsts.threadSearch,
       data: {
@@ -50,13 +31,6 @@ abstract final class ApiCalls {
         "offset": 0,
         "sort_by": "updated_at",
         "sort_order": "desc",
-        "select": [
-          "thread_id",
-          "created_at",
-          "updated_at",
-          "metadata",
-          "status",
-        ],
       },
     );
     try {
@@ -70,39 +44,67 @@ abstract final class ApiCalls {
     }
   }
 
-  static Future<void> createThread() async {
-    //     curl --location 'http://localhost:8123/threads' \
-    // --header 'Content-Type: application/json' \
-    // --data '{
-    //     "graph_id": "1",
-    //     "if_exists": "raise"
-    // }'
+  static Future<ThreadModel> createThread() async {
+    final response = await dio.post(
+      ApiConsts.threads,
+      data: {
+        "graph_id": ApiConsts.graphId,
+        "if_exists": "raise",
+        "metadata": {"title": "Untitled"},
+      },
+    );
+    ThreadModel thread = ThreadModel.fromJson(response.data);
+    return thread;
   }
 
-  static Future<void> deleteThread() async {
-    //   curl 'http://localhost:8123/threads/{thread_id}' \
-    // --request DELETE
+  static Future<void> deleteThread(String threadId) async {
+    await dio.delete("${ApiConsts.threads}/$threadId");
   }
 
-  static Future<void> updateThread() async {
-    //  curl 'http://localhost:8123/threads/{thread_id}' \
-    //   --request PATCH \
-    //   --header 'Content-Type: application/json' \
-    //   --data '{
-    //   "metadata": {},
-    // }'
-  }
-
-  static Future<ThreadChatResponse?> getThreadById(String id) async {
-    // curl --location 'http://localhost:8123/threads/{{thread_id}}' \
-    // --header 'Content-Type: application/json'
-    final response = await dio.get("${ApiConsts.threads}/$id");
+  static Future<ThreadModel?> updateThread({
+    required String threadId,
+    required Map<String, dynamic> metadata,
+  }) async {
+    final response = await dio.patch(
+      "${ApiConsts.threads}/$threadId",
+      data: {"metadata": metadata},
+    );
     try {
-      ThreadChatResponse thread = ThreadChatResponse.fromJson(response.data);
+      ThreadModel thread = ThreadModel.fromJson(response.data);
       return thread;
     } catch (e) {
-      print("Error parsing thread: $e");
+      print("Error updating thread: $e");
       return null;
     }
+  }
+
+  static Future<ThreadModel?> getThreadById(String id) async {
+    final response = await dio.get("${ApiConsts.threads}/$id");
+    // try {
+    ThreadModel thread = ThreadModel.fromJson(response.data);
+    return thread;
+    // } catch (e) {
+    //   print("Error parsing thread: $e");
+    //   return null;
+    // }
+  }
+
+  static Future<Response<ResponseBody>> sendMessageToThread(
+    String threadId,
+    String message,
+  ) async {
+    return await dio.post<ResponseBody>(
+      '/threads/$threadId/runs/stream',
+      data: {
+        "assistant_id": ApiConsts.graphId,
+        "input": {
+          "messages": [
+            {"role": "user", "content": message},
+          ],
+        },
+        "stream_mode": ["messages"], // Only listen to message tokens
+      },
+      options: Options(responseType: ResponseType.stream),
+    );
   }
 }

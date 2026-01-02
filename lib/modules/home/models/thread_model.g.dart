@@ -1,56 +1,52 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'thread_chat_model.dart';
+part of 'thread_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ThreadChatResponseImpl _$$ThreadChatResponseImplFromJson(
-  Map<String, dynamic> json,
-) => _$ThreadChatResponseImpl(
-  thread_id: json['thread_id'] as String? ?? '',
-  created_at: json['created_at'] as String? ?? '',
-  updated_at: json['updated_at'] as String? ?? '',
-  metadata: json['metadata'] == null
-      ? const ThreadMetadata()
-      : ThreadMetadata.fromJson(json['metadata'] as Map<String, dynamic>),
-  status: json['status'] as String? ?? '',
-  config: json['config'] == null
-      ? const ThreadConfig()
-      : ThreadConfig.fromJson(json['config'] as Map<String, dynamic>),
-  values: json['values'] == null
-      ? const ThreadValues()
-      : ThreadValues.fromJson(json['values'] as Map<String, dynamic>),
-  interrupts: json['interrupts'] as Map<String, dynamic>? ?? const {},
-  error: json['error'] as String?,
-);
+_$ThreadModelImpl _$$ThreadModelImplFromJson(Map<String, dynamic> json) =>
+    _$ThreadModelImpl(
+      thread_id: json['thread_id'] as String? ?? '',
+      created_at: json['created_at'] as String? ?? '',
+      updated_at: json['updated_at'] as String? ?? '',
+      metadata: json['metadata'] == null
+          ? const ThreadMetadata()
+          : ThreadMetadata.fromJson(json['metadata'] as Map<String, dynamic>),
+      status: json['status'] as String? ?? '',
+      config: json['config'] == null
+          ? const ThreadConfig()
+          : ThreadConfig.fromJson(json['config'] as Map<String, dynamic>),
+      values: json['values'] == null
+          ? const ThreadValues()
+          : ThreadValues.fromJson(json['values'] as Map<String, dynamic>),
+      error: json['error'] as String?,
+    );
 
-Map<String, dynamic> _$$ThreadChatResponseImplToJson(
-  _$ThreadChatResponseImpl instance,
-) => <String, dynamic>{
-  'thread_id': instance.thread_id,
-  'created_at': instance.created_at,
-  'updated_at': instance.updated_at,
-  'metadata': instance.metadata,
-  'status': instance.status,
-  'config': instance.config,
-  'values': instance.values,
-  'interrupts': instance.interrupts,
-  'error': instance.error,
-};
+Map<String, dynamic> _$$ThreadModelImplToJson(_$ThreadModelImpl instance) =>
+    <String, dynamic>{
+      'thread_id': instance.thread_id,
+      'created_at': instance.created_at,
+      'updated_at': instance.updated_at,
+      'metadata': instance.metadata,
+      'status': instance.status,
+      'config': instance.config,
+      'values': instance.values,
+      'error': instance.error,
+    };
 
 _$ThreadMetadataImpl _$$ThreadMetadataImplFromJson(Map<String, dynamic> json) =>
     _$ThreadMetadataImpl(
-      title: json['title'] as String? ?? '',
+      title: json['title'] as String? ?? 'Untitled',
       sources: (json['sources'] as num?)?.toInt() ?? 0,
       graph_id: json['graph_id'] as String? ?? '',
       assistant_id: json['assistant_id'] as String? ?? '',
-      source_details:
-          (json['source_details'] as List<dynamic>?)
-              ?.map((e) => SourceDetail.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      source_details: json['source_details'] == null
+          ? const SourceDetail()
+          : SourceDetail.fromJson(
+              json['source_details'] as Map<String, dynamic>,
+            ),
     );
 
 Map<String, dynamic> _$$ThreadMetadataImplToJson(

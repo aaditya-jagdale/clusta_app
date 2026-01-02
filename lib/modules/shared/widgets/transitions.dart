@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void rightSlideTransition(
   BuildContext context,
   Widget page, {
-  Duration duration = const Duration(milliseconds: 500),
+  Duration duration = const Duration(milliseconds: 800),
   Function()? onComplete,
 }) {
   Navigator.push(
@@ -38,37 +38,45 @@ void rightSlideTransition(
 Future<T?> upSlideTransition<T>(
   BuildContext context,
   Widget page, {
-  Duration duration = const Duration(milliseconds: 500),
+  Duration duration = const Duration(milliseconds: 800),
   bool useRootNavigator = false,
+  Function()? onComplete,
 }) {
-  return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(
-    PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return page;
-      },
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.easeInOutCubic;
+  return Navigator.of(context, rootNavigator: useRootNavigator)
+      .push<T>(
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return page;
+          },
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOutCubic;
 
-        var tween = Tween(
-          begin: begin,
-          end: end,
-        ).chain(CurveTween(curve: curve));
+            var tween = Tween(
+              begin: begin,
+              end: end,
+            ).chain(CurveTween(curve: curve));
 
-        var offsetAnimation = animation.drive(tween);
+            var offsetAnimation = animation.drive(tween);
 
-        return SlideTransition(position: offsetAnimation, child: child);
-      },
-      transitionDuration: duration,
-    ),
-  );
+            return SlideTransition(position: offsetAnimation, child: child);
+          },
+          transitionDuration: duration,
+        ),
+      )
+      .then((_) {
+        if (onComplete != null) {
+          onComplete();
+        }
+        return null;
+      });
 }
 
 void leftSlideTransition(
   BuildContext context,
   Widget page, {
-  Duration duration = const Duration(milliseconds: 500),
+  Duration duration = const Duration(milliseconds: 800),
 }) {
   Navigator.push(
     context,
@@ -98,7 +106,7 @@ void leftSlideTransition(
 void downSlideTransition(
   BuildContext context,
   Widget page, {
-  Duration duration = const Duration(milliseconds: 500),
+  Duration duration = const Duration(milliseconds: 800),
 }) {
   Navigator.push(
     context,
@@ -128,7 +136,7 @@ void downSlideTransition(
 void scaleUpTransition(
   BuildContext context,
   Widget page, {
-  Duration duration = const Duration(milliseconds: 500),
+  Duration duration = const Duration(milliseconds: 800),
 }) {
   Navigator.push(
     context,
@@ -158,7 +166,7 @@ void scaleUpTransition(
 void fadeTransition(
   BuildContext context,
   Widget page, {
-  Duration duration = const Duration(milliseconds: 500),
+  Duration duration = const Duration(milliseconds: 800),
 }) {
   Navigator.push(
     context,
@@ -188,7 +196,7 @@ void fadeTransition(
 void clearAllAndPush(
   BuildContext context,
   Widget page, {
-  Duration duration = const Duration(milliseconds: 500),
+  Duration duration = const Duration(milliseconds: 800),
 }) {
   Navigator.pushAndRemoveUntil(
     context,

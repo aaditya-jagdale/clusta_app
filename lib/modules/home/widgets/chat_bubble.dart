@@ -2,6 +2,7 @@ import 'package:clusta/modules/shared/widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gpt_markdown/gpt_markdown.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class UserChatBubble extends StatelessWidget {
   final String message;
@@ -48,14 +49,19 @@ class UserChatBubble extends StatelessWidget {
 
 class AssistantChatBubble extends StatelessWidget {
   final String message;
-  const AssistantChatBubble({super.key, required this.message});
+  final bool showCopyButton;
+  const AssistantChatBubble({
+    super.key,
+    required this.message,
+    this.showCopyButton = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        margin: const EdgeInsets.fromLTRB(0, 8, 16, 8),
+        margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
         padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
@@ -65,28 +71,32 @@ class AssistantChatBubble extends StatelessWidget {
             bottomRight: Radius.circular(16),
           ),
         ),
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.75,
-        ),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GptMarkdown(
               message,
+
               style: const TextStyle(
                 color: AppColors.white,
                 fontSize: 15,
                 height: 1.4,
               ),
-            ),
-            const SizedBox(height: 10),
-            IconButton(
-              icon: const Icon(Icons.copy, size: 18),
-              onPressed: () {
+              onLinkTap: (url, title) {
                 HapticFeedback.vibrate();
-                Clipboard.setData(ClipboardData(text: message));
+                launchUrlString(url);
               },
             ),
+            const SizedBox(height: 10),
+            if (showCopyButton)
+              IconButton(
+                icon: const Icon(Icons.copy, size: 18),
+                onPressed: () {
+                  HapticFeedback.vibrate();
+                  Clipboard.setData(ClipboardData(text: message));
+                },
+              ),
           ],
         ),
       ),
